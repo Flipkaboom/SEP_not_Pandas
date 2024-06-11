@@ -25,7 +25,11 @@ if(USE_OPENMP)
         message(STATUS "No OpenMP found, no multithreading.")
     endif()
 endif()
-    
+
+#Add compiler flags to store coverage information
+include(CodeCoverage.cmake)
+APPEND_COVERAGE_COMPILER_FLAGS()
+
 add_subdirectory(math)
 add_subdirectory(others)
 add_subdirectory(search)
@@ -96,3 +100,13 @@ endif()
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
+
+
+#Setup tests
+include(CTest)
+
+add_test(NAME bogo_sort COMMAND ./sorting/bogo_sort)
+
+#add more tests here to be able to run them with ctest and include them for the coverage report
+#Template:
+#add_test(NAME TestName COMMAND ExecutableToRun arg1 arg2 ...)
