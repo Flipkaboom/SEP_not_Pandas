@@ -105,8 +105,6 @@ include(CPack)
 #Setup tests
 include(CTest)
 
-add_test(NAME bogo_sort COMMAND ./sorting/bogo_sort)
-
 ############# BACKTRACKING ##############
 add_test(NAME generate_parentheses COMMAND ./backtracking/generate_parentheses)
 add_test(NAME magic_sequence COMMAND ./backtracking/magic_sequence)
@@ -138,7 +136,6 @@ add_test(NAME xor_cipher COMMAND ./ciphers/xor_cipher)
 
 ############# CPU SCHEDULING ALGORITHMS ##############
 add_test(NAME fcfs_scheduling COMMAND ./cpu_scheduling_algorithms/fcfs_scheduling)
-
 
 ############# DATA STRUCTURE ##############
 add_test(NAME avltree COMMAND ./data_structures/avltree)
@@ -274,7 +271,93 @@ add_test(NAME sum_of_digits COMMAND ./math/sum_of_digits)
 # add_test(NAME vector_cross_product COMMAND ./math/vector_cross_product)
 add_test(NAME volume COMMAND ./math/volume)
 
+############# NUMERICAL METHODS ##############
+add_test(NAME babylonian_method COMMAND ./numerical_methods/babylonian_method)
+add_test(NAME brent_method_extrema COMMAND ./numerical_methods/brent_method_extrema)
+add_test(NAME composite_simpson_rule COMMAND ./numerical_methods/composite_simpson_rule)
+add_test(NAME durand_kerner_roots COMMAND ./numerical_methods/durand_kerner_roots)
+add_test(NAME fast_fourier_transform COMMAND ./numerical_methods/fast_fourier_transform)
+add_test(NAME golden_search_extrema COMMAND ./numerical_methods/golden_search_extrema)
+add_test(NAME inverse_fast_fourier_transform COMMAND ./numerical_methods/inverse_fast_fourier_transform)
+#add_test(NAME lu_decompose COMMAND ./numerical_methods/lu_decompose)
+add_test(NAME midpoint_integral_method COMMAND ./numerical_methods/midpoint_integral_method)
+add_test(NAME qr_eigen_values COMMAND ./numerical_methods/qr_eigen_values)
+add_test(NAME rungekutta COMMAND ./numerical_methods/rungekutta)
 
+############# OPERATIONS ON DATA STRUCTURES ##############
+add_test(NAME array_left_rotation COMMAND ./operations_on_datastructures/array_left_rotation)
+add_test(NAME array_right_rotation COMMAND ./operations_on_datastructures/array_right_rotation)
+add_test(NAME circular_linked_list COMMAND ./operations_on_datastructures/circular_linked_list)
+add_test(NAME inorder_successor_of_bst COMMAND ./operations_on_datastructures/inorder_successor_of_bst)
+add_test(NAME intersection_of_two_arrays COMMAND ./operations_on_datastructures/intersection_of_two_arrays)
+add_test(NAME reverse_binary_tree COMMAND ./operations_on_datastructures/reverse_binary_tree)
+add_test(NAME trie_multiple_search COMMAND ./operations_on_datastructures/trie_multiple_search)
+add_test(NAME union_of_two_arrays COMMAND ./operations_on_datastructures/union_of_two_arrays)
+
+############# OTHERS ##############
+add_test(NAME easter COMMAND ./others/easter)
+add_test(NAME iterative_tree_traversals COMMAND ./others/iterative_tree_traversals)
+add_test(NAME kadanes3 COMMAND ./others/kadanes3)
+add_test(NAME kelvin_to_celsius COMMAND ./others/kelvin_to_celsius)
+add_test(NAME lru_cache COMMAND ./others/lru_cache)
+add_test(NAME postfix_evaluation COMMAND ./others/postfix_evaluation)
+add_test(NAME recursive_tree_traversal COMMAND ./others/recursive_tree_traversal)
+add_test(NAME smallest_circle COMMAND ./others/smallest_circle)
+
+############# PHYSICS ##############
+add_test(NAME ground_to_ground_projectile_motion COMMAND ./physics/ground_to_ground_projectile_motion)
+
+############# PROBABILITY ##############
+add_test(NAME geometric_dist COMMAND ./probability/geometric_dist)
+add_test(NAME windowed_median COMMAND ./probability/windowed_median)
+
+############# RANGE QUERIES ##############
+add_test(NAME fenwick_tree COMMAND ./range_queries/fenwick_tree)
+add_test(NAME heavy_light_decomposition COMMAND ./range_queries/heavy_light_decomposition)
+add_test(NAME persistent_seg_tree_lazy_prop COMMAND ./range_queries/persistent_seg_tree_lazy_prop)
+add_test(NAME prefix_sum_array COMMAND ./range_queries/prefix_sum_array)
+add_test(NAME segtree COMMAND ./range_queries/segtree)
+#add_test(NAME sparse_table COMMAND ./range_queries/sparse_table)
+
+############# SEARCH ##############
+add_test(NAME binary_search COMMAND ./search/binary_search)
+add_test(NAME exponential_search COMMAND ./search/exponential_search)
+add_test(NAME fibonacci_search COMMAND ./search/fibonacci_search)
+add_test(NAME floyd_cycle_detection_algo COMMAND ./search/floyd_cycle_detection_algo)
+add_test(NAME interpolation_search COMMAND ./search/interpolation_search)
+add_test(NAME median_search2 COMMAND ./search/median_search2)
+add_test(NAME saddleback_search COMMAND ./search/saddleback_search)
+add_test(NAME sublist_search COMMAND ./search/sublist_search)
+
+############# SORTING ##############
+add_test(NAME binary_insertion_sort COMMAND ./sorting/binary_insertion_sort)
+add_test(NAME bogo_sort COMMAND ./sorting/bogo_sort)
+add_test(NAME count_inversions COMMAND ./sorting/count_inversions)
+add_test(NAME cycle_sort COMMAND ./sorting/cycle_sort)
+add_test(NAME dnf_sort COMMAND ./sorting/dnf_sort)
+add_test(NAME gnome_sort COMMAND ./sorting/gnome_sort)
+add_test(NAME heap_sort COMMAND ./sorting/heap_sort)
+add_test(NAME merge_insertion_sort COMMAND ./sorting/merge_insertion_sort)
+add_test(NAME pancake_sort COMMAND ./sorting/pancake_sort)
+add_test(NAME pigeonhole_sort COMMAND ./sorting/pigeonhole_sort)
+add_test(NAME quick_sort_3 COMMAND ./sorting/quick_sort_3)
+add_test(NAME radix_sort2 COMMAND ./sorting/radix_sort2)
+add_test(NAME random_pivot_quick_sort COMMAND ./sorting/random_pivot_quick_sort)
+add_test(NAME recursive_bubble_sort COMMAND ./sorting/recursive_bubble_sort)
+add_test(NAME selection_sort_iterative COMMAND ./sorting/selection_sort_iterative)
+add_test(NAME selection_sort_recursive COMMAND ./sorting/selection_sort_recursive)
+add_test(NAME shell_sort2 COMMAND ./sorting/shell_sort2)
+add_test(NAME stooge_sort COMMAND ./sorting/stooge_sort)
+add_test(NAME strand_sort COMMAND ./sorting/strand_sort)
+add_test(NAME wave_sort COMMAND ./sorting/wave_sort)
+#add_test(NAME wiggle_sort COMMAND ./sorting/wiggle_sort)
+
+############# STRINGS ##############
+add_test(NAME boyer_moore COMMAND ./strings/boyer_moore)
+add_test(NAME horspool COMMAND ./strings/horspool)
+add_test(NAME manacher_algorithm COMMAND ./strings/manacher_algorithm)
+add_test(NAME rabin_karp COMMAND ./strings/rabin_karp)
+add_test(NAME z_function COMMAND ./strings/z_function)
 
 #add more tests here to be able to run them with ctest and include them for the coverage report
 #Template:
