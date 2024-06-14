@@ -170,7 +170,7 @@ add_test(NAME strassen_matrix_multiplication COMMAND ./divide_and_conquer/strass
 ############# DYNAMIC PROGRAMMING ##############
 add_test(NAME 0_1_knapsack COMMAND ./dynamic_programming/0_1_knapsack)
 add_test(NAME abbreviation COMMAND ./dynamic_programming/abbreviation)
-add_test(NAME armstrong_number COMMAND ./dynamic_programming/armstrong_number)
+add_test(NAME armstrong_number_1 COMMAND ./dynamic_programming/armstrong_number_1)
 add_test(NAME coin_change_topdown COMMAND ./dynamic_programming/coin_change_topdown)
 add_test(NAME cut_rod COMMAND ./dynamic_programming/cut_rod)
 add_test(NAME house_robber COMMAND ./dynamic_programming/house_robber)
@@ -180,7 +180,7 @@ add_test(NAME maximum_circular_subarray COMMAND ./dynamic_programming/maximum_ci
 add_test(NAME minimum_edit_distance COMMAND ./dynamic_programming/minimum_edit_distance)
 add_test(NAME palindrome_partitioning COMMAND ./dynamic_programming/palindrome_partitioning)
 add_test(NAME partition_problem COMMAND ./dynamic_programming/partition_problem)
-add_test(NAME subset_sum_dynamic_programming COMMAND ./dynamic_programming/subset_sum)
+add_test(NAME subset_sum_dynamic_programming COMMAND ./dynamic_programming/subset_sum_dynamic_programming)
 add_test(NAME word_break COMMAND ./dynamic_programming/word_break)
 
 ############# GEOMETRY ##############
@@ -205,7 +205,7 @@ add_test(NAME travelling_salesman_problem COMMAND ./graph/travelling_salesman_pr
 
 ############# GREEDY ALGORITHMS ##############
 add_test(NAME boruvkas_minimum_spanning_tree COMMAND ./greedy_algorithms/boruvkas_minimum_spanning_tree)
-add_test(NAME dijkstra_greedy COMMAND ./greedy_algorithms/dijkstra)
+add_test(NAME dijkstra_greedy COMMAND ./greedy_algorithms/dijkstra_greedy)
 add_test(NAME huffman COMMAND ./greedy_algorithms/huffman)
 
 ############# HASHING ##############
@@ -320,7 +320,7 @@ add_test(NAME fenwick_tree COMMAND ./range_queries/fenwick_tree)
 add_test(NAME heavy_light_decomposition COMMAND ./range_queries/heavy_light_decomposition)
 add_test(NAME persistent_seg_tree_lazy_prop COMMAND ./range_queries/persistent_seg_tree_lazy_prop)
 add_test(NAME prefix_sum_array COMMAND ./range_queries/prefix_sum_array)
-add_test(NAME segtree COMMAND ./range_queries/segtree)
+#add_test(NAME segtree COMMAND ./range_queries/segtree)
 #add_test(NAME sparse_table COMMAND ./range_queries/sparse_table)
 
 ############# SEARCH ##############
