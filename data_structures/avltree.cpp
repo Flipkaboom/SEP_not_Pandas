@@ -9,6 +9,27 @@
 #include <algorithm>  /// for std::max
 #include <iostream>   /// for std::cout
 #include <queue>      /// for std::queue
+#include <map>
+#include <string>
+
+#define INSERT_BRANCHES_NUMBER 8
+#define DELETENODE_BRANCHES_NUMBER 6
+
+std::map<std::string, bool> insert_branches_covered = {{"branch_1", false},
+                                                  {"branch_2", false},
+                                                  {"branch_3", false},
+                                                  {"branch_4", false},
+                                                  {"branch_5", false},
+                                                  {"branch_6", false},
+                                                  {"branch_7", false},
+                                                  {"branch_8", false}};
+
+std::map<std::string, bool> deletenode_branches_covered = {{"branch_1", false},
+                                                      {"branch_2", false},
+                                                      {"branch_3", false},
+                                                      {"branch_4", false},
+                                                      {"branch_5", false},
+                                                      {"branch_6", false}};
 
 using node = struct node {
     int data;
@@ -89,27 +110,35 @@ node *minValue(node *root) {
  * @param[in] item the element to be insterted into the tree
  * @return root of the updated tree
  */
-node *insert(node *root, int item) {
+node *insert(node *root, int item) {                                                               
     if (root == nullptr) {
+        insert_branches_covered["branch_1"] = true;
         return createNode(item);
     }
     if (item < root->data) {
+        insert_branches_covered["branch_2"] = true;
         root->left = insert(root->left, item);
     } else {
+        insert_branches_covered["branch_3"] = true;
         root->right = insert(root->right, item);
     }
     int b = getBalance(root);
     if (b > 1) {
+        insert_branches_covered["branch_4"] = true;
         if (getBalance(root->left) < 0) {
+            insert_branches_covered["branch_5"] = true;
             root->left = leftRotate(root->left);  // Left-Right Case
         }
         return rightRotate(root);  // Left-Left Case
     } else if (b < -1) {
+        insert_branches_covered["branch_6"] = true;
         if (getBalance(root->right) > 0) {
+            insert_branches_covered["branch_7"] = true;
             root->right = rightRotate(root->right);  // Right-Left Case
         }
         return leftRotate(root);  // Right-Right Case
     }
+    insert_branches_covered["branch_8"] = true;
     return root;
 }
 
@@ -119,18 +148,23 @@ node *insert(node *root, int item) {
  * @param[in] element the element to be deleted from the tree
  * @return root of the updated tree
  */
-node *deleteNode(node *root, int element) {
+node *deleteNode(node *root, int element) {                                                        
     if (root == nullptr) {
+        deletenode_branches_covered["branch_1"] = true;
         return root;
     }
     if (element < root->data) {
+        deletenode_branches_covered["branch_2"] = true;
         root->left = deleteNode(root->left, element);
     } else if (element > root->data) {
+        deletenode_branches_covered["branch_3"] = true;
         root->right = deleteNode(root->right, element);
 
     } else {
+        deletenode_branches_covered["branch_4"] = true;
         // Node to be deleted is leaf node or have only one Child
         if (!root->right || !root->left) {
+            deletenode_branches_covered["branch_5"] = true;
             node *temp = !root->right ? root->left : root->right;
             delete root;
             return temp;
@@ -140,6 +174,7 @@ node *deleteNode(node *root, int element) {
         root->data = temp->data;
         root->right = deleteNode(root->right, temp->data);
     }
+    deletenode_branches_covered["branch_5"] = true;
     // Balancing Tree after deletion
     return root;
 }
@@ -176,6 +211,24 @@ void levelOrder(node *root) {
     }
 }
 
+void print_coverage() {
+    int count_insert_branches = 0;
+    int count_deletenode_branches = 0;
+
+    for (const auto& pair : insert_branches_covered) {
+        if (pair.second)
+            count_insert_branches++;
+    }
+
+    for (const auto& pair : deletenode_branches_covered) {
+        if (pair.second)
+            count_deletenode_branches++;
+    }
+    std::cout << std::endl;
+    std::cout << "In the function insert " << count_insert_branches << "/" << INSERT_BRANCHES_NUMBER << " are covered." << std::endl;
+    std::cout << "In the function deleteNode " << count_deletenode_branches << "/" << DELETENODE_BRANCHES_NUMBER << " are covered." << std::endl;
+}
+
 /**
  * @brief Main function
  * @returns 0 on exit
@@ -194,5 +247,9 @@ int main() {
     std::cout << "\nLevelOrder: ";
     levelOrder(root);
     deleteAllNodes(root);
+
+    // printing the coverage measurement
+    print_coverage();
+
     return 0;
 }
