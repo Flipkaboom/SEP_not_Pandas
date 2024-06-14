@@ -1,55 +1,68 @@
 #include <iostream>
 using namespace std;
 
-int queue[10];
+const int QUEUE_SIZE = 10;
+int queue[QUEUE_SIZE];
 int front = 0;
 int rear = 0;
-int count = 0;
+int queueCount = 0;  // Renamed 'count' to 'queueCount' to avoid potential conflicts
 
-void Enque(int x) {
-    if (count == 10) {
+void Enqueue(int x) {
+    if (queueCount == QUEUE_SIZE) {
         cout << "\nOverflow";
     } else {
         queue[rear] = x;
-        rear = (rear + 1) % 10;
-        count++;
+        rear = (rear + 1) % QUEUE_SIZE;
+        queueCount++;
     }
 }
 
-void Deque() {
-    if (front == rear) {
+void Dequeue() {
+    if (queueCount == 0) {
         cout << "\nUnderflow";
-    }
-
-    else {
+    } else {
         cout << "\n" << queue[front] << " deleted";
-        front = (front + 1) % 10;
-        count--;
+        front = (front + 1) % QUEUE_SIZE;
+        queueCount--;
     }
 }
 
 void show() {
-    for (int i = 0; i < count; i++) {
-        cout << queue[(i + front) % 10] << "\t";
+    if (queueCount == 0) {
+        cout << "\nQueue is empty";
+    } else {
+        for (int i = 0; i < queueCount; i++) {
+            cout << queue[(i + front) % QUEUE_SIZE] << "\t";
+        }
+        cout << endl;
     }
 }
 
 int main() {
     int ch, x;
     do {
-        cout << "\n1. Enque";
-        cout << "\n2. Deque";
+        cout << "\n1. Enqueue";
+        cout << "\n2. Dequeue";
         cout << "\n3. Print";
-        cout << "\nEnter Your Choice : ";
+        cout << "\nEnter Your Choice (0 to exit): ";
         cin >> ch;
-        if (ch == 1) {
-            cout << "\nInsert : ";
-            cin >> x;
-            Enque(x);
-        } else if (ch == 2) {
-            Deque();
-        } else if (ch == 3) {
-            show();
+        switch (ch) {
+            case 1:
+                cout << "\nInsert : ";
+                cin >> x;
+                Enqueue(x);
+                break;
+            case 2:
+                Dequeue();
+                break;
+            case 3:
+                show();
+                break;
+            case 0:
+                cout << "Exiting...\n";
+                break;
+            default:
+                cout << "Invalid choice. Please try again.\n";
         }
     } while (ch != 0);
 

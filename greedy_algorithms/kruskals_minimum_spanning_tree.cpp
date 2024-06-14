@@ -55,15 +55,15 @@ void findMinimumEdge(const int &infinity,
  * @returns 0 on exit
  */
 int main() {
-    constexpr int INFINITY = 99999;
+    constexpr int MY_INFINITY = 99999;
     std::array<std::array<int, 6>, 6> graph{
-        0,        4,        1,        4,        INFINITY, INFINITY,
-        4,        0,        3,        8,        3,        INFINITY,
-        1,        3,        0,        INFINITY, 1,        INFINITY,
-        4,        8,        INFINITY, 0,        5,        7,
-        INFINITY, 3,        1,        5,        0,        INFINITY,
-        INFINITY, INFINITY, INFINITY, 7,        INFINITY, 0};
+        0,        4,        1,        4,        MY_INFINITY, MY_INFINITY,
+        4,        0,        3,        8,        3,        MY_INFINITY,
+        1,        3,        0,        MY_INFINITY, 1,        MY_INFINITY,
+        4,        8,        MY_INFINITY, 0,        5,        7,
+        MY_INFINITY, 3,        1,        5,        0,        MY_INFINITY,
+        MY_INFINITY, MY_INFINITY, MY_INFINITY, 7,        MY_INFINITY, 0};
 
-    greedy_algorithms::findMinimumEdge(INFINITY, graph);
+    greedy_algorithms::findMinimumEdge(MY_INFINITY, graph);
     return 0;
 }

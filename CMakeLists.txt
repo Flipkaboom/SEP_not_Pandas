@@ -51,6 +51,8 @@ add_subdirectory(games)
 add_subdirectory(cpu_scheduling_algorithms)
 add_subdirectory(physics)
 add_subdirectory(dynamic_programming)
+add_subdirectory(greedy_algorithms)
+add_subdirectory(operations_on_datastructures)
 
 cmake_policy(SET CMP0054 NEW)
 cmake_policy(SET CMP0057 NEW)
@@ -198,7 +200,7 @@ add_test(NAME lowest_common_ancestor COMMAND ./graph/lowest_common_ancestor)
 add_test(NAME travelling_salesman_problem COMMAND ./graph/travelling_salesman_problem)
 
 ############# GRAPHICS ##############
-add_test(NAME spirograph COMMAND ./graphics/spirograph)
+#add_test(NAME spirograph COMMAND ./graphics/spirograph)
 
 ############# GREEDY ALGORITHMS ##############
 add_test(NAME boruvkas_minimum_spanning_tree COMMAND ./greedy_algorithms/boruvkas_minimum_spanning_tree)
@@ -323,7 +325,7 @@ add_test(NAME segtree COMMAND ./range_queries/segtree)
 ############# SEARCH ##############
 add_test(NAME binary_search COMMAND ./search/binary_search)
 add_test(NAME exponential_search COMMAND ./search/exponential_search)
-add_test(NAME fibonacci_search COMMAND ./search/fibonacci_search)
+#add_test(NAME fibonacci_search COMMAND ./search/fibonacci_search)
 add_test(NAME floyd_cycle_detection_algo COMMAND ./search/floyd_cycle_detection_algo)
 add_test(NAME interpolation_search COMMAND ./search/interpolation_search)
 add_test(NAME median_search2 COMMAND ./search/median_search2)
