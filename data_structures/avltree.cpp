@@ -174,7 +174,7 @@ node *deleteNode(node *root, int element) {
         root->data = temp->data;
         root->right = deleteNode(root->right, temp->data);
     }
-    deletenode_branches_covered["branch_5"] = true;
+    deletenode_branches_covered["branch_6"] = true;
     // Balancing Tree after deletion
     return root;
 }
@@ -221,7 +221,7 @@ void print_coverage() {
     }
 
     for (const auto& pair : deletenode_branches_covered) {
-        if (pair.second)
+        if (pair.second) 
             count_deletenode_branches++;
     }
     std::cout << std::endl;
@@ -233,11 +233,27 @@ void print_coverage() {
  * @brief Main function
  * @returns 0 on exit
  */
+
+void test_for_improved_coverage() {     // created a case when the rotation would need Left-Right so the tree is left heavy
+    node *root = nullptr;
+    root = deleteNode(root, 1);        // tried to delete the root when it is null to cover first branch in deleteNode
+    root = insert(root, 30);
+    root = insert(root, 10);
+    root = insert(root, 20);
+
+    std::cout << "\nLevelOrder: ";
+    levelOrder(root);
+    deleteAllNodes(root);
+}
+
 int main() {
     // Testing AVL Tree
     node *root = nullptr;
     int i = 0;
-    for (i = 1; i <= 7; i++) root = insert(root, i);
+    //for (i = 1; i <= 7; i++) root = insert(root, i);            //the 2 commented lines instead of this will imporve coverage of insert by 2 (brances 2 and 7)
+    for (i = 1; i <= 3; i++) root = insert(root, i);
+    for (i = 7; i >=4; i--) root = insert(root, i);
+
     std::cout << "LevelOrder: ";
     levelOrder(root);
     root = deleteNode(root, 1);  // Deleting key with value 1
@@ -248,8 +264,13 @@ int main() {
     levelOrder(root);
     deleteAllNodes(root);
 
+    test_for_improved_coverage();
+
     // printing the coverage measurement
     print_coverage();
 
     return 0;
 }
+
+
+
