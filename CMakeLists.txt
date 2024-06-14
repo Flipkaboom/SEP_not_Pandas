@@ -53,6 +53,7 @@ add_subdirectory(physics)
 add_subdirectory(dynamic_programming)
 add_subdirectory(greedy_algorithms)
 add_subdirectory(operations_on_datastructures)
+add_subdirectory(range_queries)
 
 cmake_policy(SET CMP0054 NEW)
 cmake_policy(SET CMP0057 NEW)
