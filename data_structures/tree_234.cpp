@@ -21,6 +21,17 @@ Introduction](https://www.educative.io/page/5689413791121408/80001)
 #include <queue>     /// for std::queue
 #include <string>    /// for std::to_string
 
+#include <map>
+
+#define TRY_RIGHT_ROTATE_BRANCHES_NUMBER 2
+#define TRAVERSE_BRANCHES_NUMBER 2
+
+std::map<std::string, bool> try_right_rotate_branches_covered = {{"branch_1", false},
+                                                  {"branch_2", false}};
+
+std::map<std::string, bool> traverse_branches_covered = {{"branch_1", false},
+                                                      {"branch_2", false}};
+
 /**
  * @namespace data_structures
  * @brief Algorithms with data structures
@@ -566,11 +577,13 @@ void Tree234::Traverse() {
 
 void Tree234::Traverse(Node *node) {
     if (!node) {
+        traverse_branches_covered["branch_1"] = true;
         return;
     }
 
     int8_t i = 0;
     for (i = 0; i < node->GetCount(); i++) {
+        traverse_branches_covered["branch_2"] = true;
         Traverse(node->GetChild(i));
         std::cout << node->GetItem(i) << ", ";
     }
@@ -815,6 +828,7 @@ bool Tree234::TryRightRotate(Node *parent, Node *to_child) {
 
     // child is left most, can not do right rotate to it
     if (to_child_index <= 0) {
+        try_right_rotate_branches_covered["branch_1"] = true;
         return false;
     }
 
@@ -822,6 +836,7 @@ bool Tree234::TryRightRotate(Node *parent, Node *to_child) {
 
     // right sibling is 2-node. can not do left rotate.
     if (left_sibling->Is2Node()) {
+        try_right_rotate_branches_covered["branch_2"] = true;
         return false;
     }
 
@@ -1289,6 +1304,80 @@ static void test2(int64_t n) {
     tree.Print((std::to_string(n) + ".dot").c_str());
 }
 
+void print_right_rotate_coverage() {
+    int count_right_rotate_branches = 0;
+    int branch_count = 1;
+
+    std::cout << std::endl;
+    std::cout << "Displaying results for function TryRightRotate: " << std::endl;
+
+    for (const auto& [key, value] : try_right_rotate_branches_covered) {
+        if (value){
+            std::cout << "  Branch " << branch_count << " was hit" << std::endl;
+            count_right_rotate_branches++;
+        }
+        else
+            std::cout << "  Branch " << branch_count << " was NOT hit" << std::endl;
+
+        branch_count++;
+    }
+
+    std::cout << "  Total covered branches: " << count_right_rotate_branches << "/" << TRY_RIGHT_ROTATE_BRANCHES_NUMBER << std::endl;
+}
+
+void print_traverse_coverage() {
+    int count_traverse_branches = 0;
+    int branch_count = 1;
+
+    std::cout << std::endl;
+    std::cout << "Displaying results for function Traverse: " << std::endl;
+
+    for (const auto& [key, value] : traverse_branches_covered) {
+        if (value){
+            std::cout << "  Branch " << branch_count << " was hit" << std::endl;
+            count_traverse_branches++;
+        }
+        else
+            std::cout << "  Branch " << branch_count << " was NOT hit" << std::endl;
+
+        branch_count++;
+    }
+
+    std::cout << "  Total covered branches: " << count_traverse_branches << "/" << TRAVERSE_BRANCHES_NUMBER << std::endl;
+}
+
+void test_right_rotate(){
+    data_structures::tree_234::Tree234 tree;
+
+    tree.Insert(1);
+    tree.Insert(10);
+    tree.Insert(20);
+    tree.Insert(30);
+
+    tree.Remove(1); // Hits branch 1
+
+    data_structures::tree_234::Tree234 tree1;
+
+    tree1.Insert(10);
+    tree1.Insert(20);
+    tree1.Insert(30);
+    tree1.Insert(25);
+    tree1.Insert(40);
+    tree1.Insert(50);
+
+    tree1.Remove(25); // Hits branch 2
+
+}
+
+void test_traverse(){
+    data_structures::tree_234::Tree234 tree;
+
+    tree.Traverse(); // Hits branch 1
+
+    tree.Insert(1);
+    tree.Traverse(); // Hits branch 2
+}
+
 /**
  * @brief Main function
  * @param argc commandline argument count (ignored)
@@ -1301,6 +1390,12 @@ int main(int argc, char *argv[]) {
     } else {
         test2(std::stoi(argv[1]));  // execute 2nd test
     }
+
+    test_right_rotate();
+    test_traverse();
+
+    print_right_rotate_coverage();
+    print_traverse_coverage();
 
     return 0;
 }
