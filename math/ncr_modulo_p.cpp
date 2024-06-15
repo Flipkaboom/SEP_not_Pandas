@@ -11,7 +11,18 @@
 
 #include <cassert>   /// for assert
 #include <iostream>  /// for io operations
-#include <vector>    /// for std::vector
+#include <map>
+#include <vector>  /// for std::vector
+
+#define BRANCHES_MOD_INVERSE 2
+#define BRANCHES_NCR         6
+
+std::map<std::string, bool> branchCoverageMapModInverse = {
+    {"ModInverse_1", false}, {"ModInverse_2", false}};
+
+std::map<std::string, bool> branchCoverageMapNcr = {
+    {"Ncr_1", false}, {"Ncr_2", false}, {"Ncr_3", false},
+    {"Ncr_4", false}, {"Ncr_5", false}, {"Ncr_6", false}};
 
 /**
  * @namespace math
@@ -77,9 +88,11 @@ class NCRModuloP {
         int64_t x = 0, y = 0;
         uint64_t g = gcdExtended(a, m, &x, &y);
         if (g != 1) {  // modular inverse doesn't exist
+            branchCoverageMapModInverse["ModInverse_1"] = true;
             return -1;
         } else {
             int64_t res = ((x + m) % m);
+            branchCoverageMapModInverse["ModInverse_2"] = true;
             return res;
         }
     }
@@ -92,23 +105,29 @@ class NCRModuloP {
     int64_t ncr(const uint64_t& n, const uint64_t& r, const uint64_t& p) {
         // Base cases
         if (r > n) {
+            branchCoverageMapNcr["Ncr_1"] = true;
             return 0;
         }
         if (r == 1) {
+            branchCoverageMapNcr["Ncr_2"] = true;
             return n % p;
         }
         if (r == 0 || r == n) {
+            branchCoverageMapNcr["Ncr_3"] = true;
             return 1;
         }
         // fac is a global array with fac[r] = (r! % p)
         int64_t denominator = modInverse(fac[r], p);
         if (denominator < 0) {  // modular inverse doesn't exist
+            branchCoverageMapNcr["Ncr_4"] = true;
             return -1;
         }
         denominator = (denominator * modInverse(fac[n - r], p)) % p;
         if (denominator < 0) {  // modular inverse doesn't exist
+            branchCoverageMapNcr["Ncr_5"] = true;
             return -1;
         }
+        branchCoverageMapNcr["Ncr_6"] = true;
         return (fac[n] * denominator) % p;
     }
 };
@@ -126,8 +145,47 @@ static void tests(math::ncr_modulo_p::NCRModuloP ncrObj) {
     assert(ncrObj.ncr(52323, 26161, 1000000007) == 224944353);
     // 6 C 2 = 30, 30%5 = 0
     assert(ncrObj.ncr(6, 2, 5) == 0);
-    // 7C3 = 35, 35 % 29 = 8
+    // 7C3 = 35, 35 % 29 = 8 assert(ncrObj.ncr(7, 3, 29) == 6);
     assert(ncrObj.ncr(7, 3, 29) == 6);
+}
+
+static void enhanced_testing(math::ncr_modulo_p::NCRModuloP ncrObj) {
+    assert(ncrObj.modInverse(6, 15) == -1);
+    assert(ncrObj.ncr(50, 7, 14) == -1);
+    assert(ncrObj.ncr(-6, 2, -3) == -1);
+}
+
+static void print_coverage() {
+    int coveredBranchesModInverse = 0;
+    int coveredBranchesNcr = 0;
+    for (const auto& pair : branchCoverageMapModInverse) {
+        if (pair.second) {
+            coveredBranchesModInverse++;
+        }
+    }
+
+    for (const auto& pair : branchCoverageMapNcr) {
+        if (pair.second) {
+            coveredBranchesNcr++;
+        }
+    }
+
+    double coveragePercentageBinarySearch =
+        static_cast<double>(coveredBranchesModInverse) / BRANCHES_MOD_INVERSE *
+        100;
+    std::cout << "Branch Coverage in Binary Search: "
+              << coveragePercentageBinarySearch << "%" << std::endl;
+
+    double coveragePercentageInsert =
+        static_cast<double>(coveredBranchesNcr) / BRANCHES_NCR * 100;
+    std::cout << "Branch Coverage in Insert: " << coveragePercentageInsert
+              << "%" << std::endl;
+
+    double totalCoveragePercentage =
+        static_cast<double>((coveredBranchesModInverse + coveredBranchesNcr)) /
+        (BRANCHES_MOD_INVERSE + BRANCHES_NCR) * 100;
+    std::cout << "Total Branch Coverage across Both: "
+              << totalCoveragePercentage << "%" << std::endl;
 }
 
 /**
@@ -146,5 +204,8 @@ int main() {
     }
     tests(ncrObj);  // execute the tests
     std::cout << "Assertions passed\n";
+
+    enhanced_testing(ncrObj);
+    print_coverage();
     return 0;
 }
