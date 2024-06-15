@@ -23,11 +23,12 @@ Introduction](https://www.educative.io/page/5689413791121408/80001)
 
 #include <map>
 
-#define TRY_RIGHT_ROTATE_BRANCHES_NUMBER 2
+#define TRY_RIGHT_ROTATE_BRANCHES_NUMBER 3
 #define TRAVERSE_BRANCHES_NUMBER 2
 
 std::map<std::string, bool> try_right_rotate_branches_covered = {{"branch_1", false},
-                                                  {"branch_2", false}};
+                                                    {"branch_2", false},
+                                                  {"branch_3", false}};
 
 std::map<std::string, bool> traverse_branches_covered = {{"branch_1", false},
                                                       {"branch_2", false}};
@@ -839,6 +840,7 @@ bool Tree234::TryRightRotate(Node *parent, Node *to_child) {
         try_right_rotate_branches_covered["branch_2"] = true;
         return false;
     }
+    try_right_rotate_branches_covered["branch_3"] = true;
 
     RightRotate(parent, to_child_index - 1);
 
@@ -1349,23 +1351,21 @@ void print_traverse_coverage() {
 void test_right_rotate(){
     data_structures::tree_234::Tree234 tree;
 
-    tree.Insert(1);
     tree.Insert(10);
     tree.Insert(20);
     tree.Insert(30);
+    tree.Insert(40);
+    tree.Insert(50);
+    tree.Insert(1);
+    tree.Insert(2);
+    tree.Insert(3);
+    tree.Insert(4);
+    tree.Insert(5);
+    tree.Insert(6);
+    tree.Insert(7);
 
-    tree.Remove(1); // Hits branch 1
-
-    data_structures::tree_234::Tree234 tree1;
-
-    tree1.Insert(10);
-    tree1.Insert(20);
-    tree1.Insert(30);
-    tree1.Insert(25);
-    tree1.Insert(40);
-    tree1.Insert(50);
-
-    tree1.Remove(25); // Hits branch 2
+    tree.Remove(3); // Hits branch 1 and 2
+    tree.Remove(5); // Hits branch 3
 
 }
 
