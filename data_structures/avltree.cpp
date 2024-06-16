@@ -124,18 +124,18 @@ node *insert(node *root, int item) {
     }
     int b = getBalance(root);
     if (b > 1) {
-        insert_branches_covered["branch_4"] = true;
         if (getBalance(root->left) < 0) {
             insert_branches_covered["branch_5"] = true;
             root->left = leftRotate(root->left);  // Left-Right Case
         }
+        insert_branches_covered["branch_4"] = true;
         return rightRotate(root);  // Left-Left Case
     } else if (b < -1) {
-        insert_branches_covered["branch_6"] = true;
         if (getBalance(root->right) > 0) {
             insert_branches_covered["branch_7"] = true;
             root->right = rightRotate(root->right);  // Right-Left Case
         }
+        insert_branches_covered["branch_6"] = true;
         return leftRotate(root);  // Right-Right Case
     }
     insert_branches_covered["branch_8"] = true;
@@ -161,7 +161,6 @@ node *deleteNode(node *root, int element) {
         root->right = deleteNode(root->right, element);
 
     } else {
-        deletenode_branches_covered["branch_4"] = true;
         // Node to be deleted is leaf node or have only one Child
         if (!root->right || !root->left) {
             deletenode_branches_covered["branch_5"] = true;
@@ -169,6 +168,7 @@ node *deleteNode(node *root, int element) {
             delete root;
             return temp;
         }
+        deletenode_branches_covered["branch_4"] = true;
         // Node to be deleted have both left and right subtrees
         node *temp = minValue(root->right);
         root->data = temp->data;
@@ -234,7 +234,7 @@ void print_coverage() {
  * @returns 0 on exit
  */
 
-void test_for_improved_coverage() {     // created a case when the rotation would need Left-Right so the tree is left heavy
+void test_left_heavy_for_coverage() {     // created a case when the rotation would need Left-Right so the tree is left heavy
     node *root = nullptr;
     root = deleteNode(root, 1);        // tried to delete the root when it is null to cover first branch in deleteNode
     root = insert(root, 30);
@@ -244,6 +244,19 @@ void test_for_improved_coverage() {     // created a case when the rotation woul
     std::cout << "\nLevelOrder: ";
     levelOrder(root);
     deleteAllNodes(root);
+}
+
+void test_del_node_two_subtrees() {     //created a case that deleteNode tries to delete a node with both left and right subtrees
+    node *root = nullptr;                       
+    root = insert(root, 20);
+    root = insert(root, 10);
+    root = insert(root, 30);
+    root = insert(root, 5);
+    root = insert(root, 15);
+    root = insert(root, 25);
+    root = insert(root, 35);
+
+    deleteNode(root, 20);               //to cover branch_4 of deleteNode
 }
 
 int main() {
@@ -264,9 +277,9 @@ int main() {
     levelOrder(root);
     deleteAllNodes(root);
 
-    test_for_improved_coverage();
+    test_left_heavy_for_coverage();
+    test_del_node_two_subtrees();
 
-    // printing the coverage measurement
     print_coverage();
 
     return 0;
