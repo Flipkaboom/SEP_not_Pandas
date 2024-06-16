@@ -20,6 +20,21 @@
 #include <array>     /// For array
 #include <cassert>   /// For assert
 #include <iostream>  /// For IO operations
+#include <map>
+
+std::map<std::string, bool> insert_branches_covered = {{"branch_1", false},
+                                                       {"branch_2", false},
+                                                       {"branch_3", false},
+                                                       {"branch_4", false},
+                                                       {"branch_5", false},
+                                                       {"branch_6", false}};
+
+std::map<std::string, bool> erase_branches_covered = {{"branch_1", false},
+                                                      {"branch_2", false},
+                                                      {"branch_3", false},
+                                                      {"branch_4", false},
+                                                      {"branch_5", false},
+                                                      {"branch_6", false}};
 
 /**
  * @namespace
@@ -83,18 +98,26 @@ struct Treap {
      */
     void _insert(int &x, int k) {
         if (x) {
+            insert_branches_covered["branch_1"] = true;
             if (key[x] == k) {
+                insert_branches_covered["branch_2"] = true;
                 cnt[x]++;
             }  // If the node already exists, the number of copies is ++
             else {
+                insert_branches_covered["branch_3"] = true;
                 int t = (key[x] < k);  // Insert according to BST properties
                 _insert(childs[x][t], k);
                 // After insertion, the heap properties are retained by rotation
                 if (priority[childs[x][t]] < priority[x]) {
+                    insert_branches_covered["branch_4"] = true;
                     rotate(x, t);
+                }
+                else {
+                    insert_branches_covered["branch_5"] = true;
                 }
             }
         } else {  // Create a new node
+            insert_branches_covered["branch_6"] = true;
             x = treapCnt++;
             key[x] = k;
             cnt[x] = 1;
@@ -110,14 +133,20 @@ struct Treap {
      */
     void _erase(int &x, int k) {
         if (key[x] == k) {
+            erase_branches_covered["branch_1"] = true;
             if (cnt[x] > 1) {
+                erase_branches_covered["branch_2"] = true;
                 cnt[x]--;
             }  // If the node has more than one copy, the number of copies --
             else {
+                erase_branches_covered["branch_3"] = true;
                 if (childs[x][0] == 0 && childs[x][1] == 0) {
+                    erase_branches_covered["branch_4"] = true;
                     x = 0;
                     return;
-                }  // If there are no children, delete and return
+                }
+                erase_branches_covered["branch_5"] = true;
+                // If there are no children, delete and return
                 // Otherwise, we need to rotate the sons and delete them
                 // recursively
                 int t = (priority[childs[x][0]] > priority[childs[x][1]]);
@@ -125,6 +154,7 @@ struct Treap {
                 _erase(x, k);
             }
         } else {  // Find the target value based on BST properties
+            erase_branches_covered["branch_6"] = true;
             _erase(childs[x][key[x] < k], k);
         }
         update(x);
@@ -249,11 +279,40 @@ static void test() {
 
     std::cout << "All tests have successfully passed!\n";
 }
+
+/**
+ * @brief Print coverage results for a single function
+ * @param coverage_map Map containing coverage info per branch
+ * @param name Name to be printed
+ */
+static void print_coverage(std::map<std::string, bool> &coverage_map, const std::string &name){
+    int covered_count = 0;
+
+    std::cout << "Coverage for " << name << ": " << std::endl;
+    for (auto const& branch : coverage_map){
+        std::string branch_name = branch.first;
+        bool covered = branch.second;
+        std::cout << "        " << branch_name << ": " << (covered ? "Covered" : "Not covered") << std::endl;
+        if(covered) covered_count++;
+    }
+    std::cout << "    Total covered: " << covered_count << "/" << coverage_map.size()
+                << " (" << ((float)covered_count / coverage_map.size() * 100) << "%)" << std::endl;
+}
+
+/**
+ * @brief Print coverage information for all modified functions
+ */
+static void print_coverage_all(){
+    print_coverage(insert_branches_covered, "insert");
+    print_coverage(erase_branches_covered, "erase");
+}
+
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
     test();  // run self-test implementations
+    print_coverage_all();
     return 0;
 }
