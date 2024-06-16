@@ -277,6 +277,17 @@ static void test() {
     assert(mTreap.get_rank(10) == 7);
     assert(mTreap.get_predecessor(10) == 7);
 
+    //Improving coverage for insert and erase
+    data_structures::treap::Treap mTreap2;
+    mTreap2.insert(1);
+    assert(mTreap2.get_next(0) == 1);
+    mTreap2.insert(1);
+    assert(mTreap2.get_next(0) == 1);
+    mTreap2.erase(1);
+    assert(mTreap2.get_next(0) == 1);
+    mTreap2.erase(1);
+    assert(mTreap2.get_next(0) == -1);
+
     std::cout << "All tests have successfully passed!\n";
 }
 
