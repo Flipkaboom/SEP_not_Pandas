@@ -12,8 +12,8 @@
 #include <map>
 #include <string>
 
-#define INSERT_BRANCHES_NUMBER 8
-#define DELETENODE_BRANCHES_NUMBER 6
+#define INSERT_BRANCHES_NUMBER 11
+#define DELETENODE_BRANCHES_NUMBER 7
 
 std::map<std::string, bool> insert_branches_covered = {{"branch_1", false},
                                                   {"branch_2", false},
@@ -22,14 +22,18 @@ std::map<std::string, bool> insert_branches_covered = {{"branch_1", false},
                                                   {"branch_5", false},
                                                   {"branch_6", false},
                                                   {"branch_7", false},
-                                                  {"branch_8", false}};
+                                                  {"branch_8", false},
+                                                  {"branch_9", false},
+                                                  {"branch_10", false},
+                                                  {"branch_11", false}};
 
 std::map<std::string, bool> deletenode_branches_covered = {{"branch_1", false},
                                                       {"branch_2", false},
                                                       {"branch_3", false},
                                                       {"branch_4", false},
                                                       {"branch_5", false},
-                                                      {"branch_6", false}};
+                                                      {"branch_6", false},
+                                                      {"branch_7", false}};
 
 using node = struct node {
     int data;
@@ -114,31 +118,38 @@ node *insert(node *root, int item) {
     if (root == nullptr) {
         insert_branches_covered["branch_1"] = true;
         return createNode(item);
+    } else {
+        insert_branches_covered["branch_2"] = true;
     }
     if (item < root->data) {
-        insert_branches_covered["branch_2"] = true;
+        insert_branches_covered["branch_3"] = true;
         root->left = insert(root->left, item);
     } else {
-        insert_branches_covered["branch_3"] = true;
+        insert_branches_covered["branch_4"] = true;
         root->right = insert(root->right, item);
     }
     int b = getBalance(root);
     if (b > 1) {
         if (getBalance(root->left) < 0) {
-            insert_branches_covered["branch_5"] = true;
+            insert_branches_covered["branch_6"] = true;
             root->left = leftRotate(root->left);  // Left-Right Case
+        } else {
+            insert_branches_covered["branch_7"] = true;
         }
-        insert_branches_covered["branch_4"] = true;
+        insert_branches_covered["branch_5"] = true;
         return rightRotate(root);  // Left-Left Case
     } else if (b < -1) {
         if (getBalance(root->right) > 0) {
-            insert_branches_covered["branch_7"] = true;
+            insert_branches_covered["branch_9"] = true;
             root->right = rightRotate(root->right);  // Right-Left Case
+        } else {
+            insert_branches_covered["branch_10"] = true;
         }
-        insert_branches_covered["branch_6"] = true;
+        insert_branches_covered["branch_8"] = true;
         return leftRotate(root);  // Right-Right Case
+    } else {
+        insert_branches_covered["branch_11"] = true;
     }
-    insert_branches_covered["branch_8"] = true;
     return root;
 }
 
@@ -152,29 +163,32 @@ node *deleteNode(node *root, int element) {
     if (root == nullptr) {
         deletenode_branches_covered["branch_1"] = true;
         return root;
+    } else {
+        deletenode_branches_covered["branch_2"] = true;
     }
     if (element < root->data) {
-        deletenode_branches_covered["branch_2"] = true;
+        deletenode_branches_covered["branch_3"] = true;
         root->left = deleteNode(root->left, element);
     } else if (element > root->data) {
-        deletenode_branches_covered["branch_3"] = true;
+        deletenode_branches_covered["branch_4"] = true;
         root->right = deleteNode(root->right, element);
 
     } else {
         // Node to be deleted is leaf node or have only one Child
         if (!root->right || !root->left) {
-            deletenode_branches_covered["branch_5"] = true;
+            deletenode_branches_covered["branch_6"] = true;
             node *temp = !root->right ? root->left : root->right;
             delete root;
             return temp;
+        } else {
+            deletenode_branches_covered["branch_7"] = true;
         }
-        deletenode_branches_covered["branch_4"] = true;
+        deletenode_branches_covered["branch_5"] = true;
         // Node to be deleted have both left and right subtrees
         node *temp = minValue(root->right);
         root->data = temp->data;
         root->right = deleteNode(root->right, temp->data);
     }
-    deletenode_branches_covered["branch_6"] = true;
     // Balancing Tree after deletion
     return root;
 }
@@ -240,6 +254,9 @@ void test_left_heavy_for_coverage() {     // created a case when the rotation wo
     root = insert(root, 30);
     root = insert(root, 10);
     root = insert(root, 20);
+    root = insert(root, 17);        //made the tree Left-Left heavy to cover branch_7
+    root = insert(root, 16);
+    root = insert(root, 15);
 
     std::cout << "\nLevelOrder: ";
     levelOrder(root);
@@ -256,14 +273,14 @@ void test_del_node_two_subtrees() {     //created a case that deleteNode tries t
     root = insert(root, 25);
     root = insert(root, 35);
 
-    deleteNode(root, 20);               //to cover branch_4 of deleteNode
+    deleteNode(root, 20);               //to cover branch_5 of deleteNode
 }
 
 int main() {
     // Testing AVL Tree
     node *root = nullptr;
     int i = 0;
-    //for (i = 1; i <= 7; i++) root = insert(root, i);            //the 2 commented lines instead of this will imporve coverage of insert by 2 (brances 2 and 7)
+    //for (i = 1; i <= 7; i++) root = insert(root, i);            //the 2 commented lines instead of this will imporve coverage of insert by 2 (brances 3 and 9)
     for (i = 1; i <= 3; i++) root = insert(root, i);
     for (i = 7; i >=4; i--) root = insert(root, i);
 
