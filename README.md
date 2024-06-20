@@ -20,10 +20,10 @@ Programming language: C++
 
 ### Your own coverage tool
 
-#### Alejandro Guerena Gonzalez
+#### <u>Alejandro Guerena Gonzalez</u>
 
-##### bool Tree234::TryRightRotate(Node *parent, Node *to_child)
-##### void Tree234::Traverse(Node *node)
+###### bool Tree234::TryRightRotate(Node *parent, Node *to_child)
+###### void Tree234::Traverse(Node *node)
 
 **Link to commit:** [Commit hash: a04e95c](https://github.com/Flipkaboom/SEP_Pandas/commit/a04e95c7e558e7207822ba46c26297e12121c1a8)
 
@@ -41,7 +41,7 @@ This image shows the coverage of TryRightRotate() and Traverse() functions throu
 
 ### Individual tests
 
-#### Alejandro Guerena Gonzalez
+#### <u>Alejandro Guerena Gonzalez</u>
 
 ###### void test_right_rotate()
 ###### void test_traverse()
