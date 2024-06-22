@@ -14,9 +14,30 @@ Programming language: C++
 
 ### Existing tool
 
-<Inform the name of the existing tool that was executed and how it was executed>
+To measure the coverage we used lcov. To execute it we made a small script that generates coverage information and
+automatically creates an HTML report.
 
-<Show the coverage results provided by the existing tool with a screenshot>
+generate_coverage.sh:
+```
+lcov -c -d ./ -o coverage.run
+genhtml -o ./html/ coverage.run
+```
+
+For lcov to be able to capture coverage data we had to add some flags in the CMakeLists.txt:
+```
+include(CodeCoverage.cmake)
+APPEND_COVERAGE_COMPILER_FLAGS()
+```
+
+After setting up cmake with `cmake .`, compiling the project using `make` and running the tests with `ctest`, the 
+coverage report can be generated using generate_coverage.sh.
+
+Because lcov coverage can only go up when re-running tests, never down, we made a small script that removes all
+existing coverage data, called reset_coverage.sh.
+
+Coverage results:
+
+![Full Old Coverage report](report_img/Full_old_report.png)
 
 ### Your own coverage tool
 
@@ -116,9 +137,13 @@ the first erase (because there are two of them) and checking that it no longer e
 
 ### Overall
 
-<Provide a screenshot of the old coverage results by running an existing tool (the same as you already showed above)>
+Old coverage result:
 
-<Provide a screenshot of the new coverage results by running the existing tool using all test modifications made by the group>
+![Full Old Coverage report](report_img/Full_old_report.png)
+
+New coverage result:
+
+![Full New Coverage report](report_img/Full_new_report.png)
 
 ## Statement of individual contributions
 
