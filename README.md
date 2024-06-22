@@ -147,4 +147,12 @@ New coverage result:
 
 ## Statement of individual contributions
 
+#### <u>Flip Grim</u>
+- Finding github project to use
+- Figuring out how to setup/compile project
+- Setup testing
+- Setup coverage measurement
+- Instrumenting and improving coverage for data_structures/treap.cpp
+- Adding overall coverage results to readme
+
 <Write what each group member did>
