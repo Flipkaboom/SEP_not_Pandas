@@ -6,7 +6,7 @@ Name: The Algorithms - C++
 
 URL: [https://github.com/TheAlgorithms/C-Plus-Plus](https://github.com/TheAlgorithms/C-Plus-Plus)
 
-Number of lines of code and the tool used to count it: <TODO>
+Number of lines of code and the tool used to count it: 31 KLOC (Measured using lizard)
 
 Programming language: C++
 
