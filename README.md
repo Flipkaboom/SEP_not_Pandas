@@ -37,6 +37,21 @@ This commit shows the addition of checking the 'invisible' else branch of TryRig
 
 This image shows the coverage of TryRightRotate() and Traverse() functions through print_right_rotate_coverage() and print_traverse_coverage() before adding tests and improving the coverage.
 
+#### <u>Flip Grim</u>
+
+###### void _insert(int &x, int k)
+###### void _erase(int &x, int k)
+
+**Link to commit:** [Commit hash: 8b0f136](https://github.com/Flipkaboom/SEP_Pandas/commit/8b0f136ebd098611d33d93259d401a125ea277dc)
+
+In this commit, branch coverage measurement is added to the functions listed above, located in
+data_structures/treap.cpp. This is done using two maps that map each branch to a boolean value. After running all tests,
+the coverage for each branch is printed, then the overall coverage per function is printed.
+
+Results: 
+
+![Coverage results](old_coverage_img/Flip_old_coverage.png)
+
 ## Coverage improvement
 
 ### Individual tests
@@ -63,6 +78,41 @@ The structure of the tree was changed here, by inserting different nodes to the 
 ![New Coverage report](report_img/Alejandro_new_report.png)
 
 The line coverage within tree_234.cpp was 56.2%. After the introduction of my tests I implemented, the line coverage improved to 78.7%. The branch coverage improved from 69.4% to 90.6% within the tree_234.cpp file. The coverage was improved with the addition of my tests because all the statements within bool Tree234::TryRightRotate(Node *parent, Node *to_child) and void Tree234::Traverse(Node *node) functions were executed atleast once. Prior to the introduction of the tests, none of the lines within these functions were executed.
+
+#### <u>Flip Grim</u>
+
+###### static void test()
+
+**Link to commit:** [Commit hash: 3cd392c](https://github.com/Flipkaboom/SEP_Pandas/commit/3cd392c7f75dee210900b2e77fc0e31dfc0e76be)
+
+Line coverage results before:
+
+![Old Coverage report](report_img/Flip_old_report.png)
+
+Branch coverage results before:
+
+![Coverage results](old_coverage_img/Flip_old_coverage.png)
+
+Line coverage results after:
+
+![Old Coverage report](report_img/Flip_new_report.png)
+
+Branch coverage results after:
+
+![Coverage results](new_coverage_img/Flip_new_coverage.png)
+
+The original line coverage of treap.cpp was 96.1%. After adding new tests to the test() function the line coverage has
+improved to 99.3%.
+
+The original branch coverage (on the instrumented functions) was 10/12 (83.3%) branches reached. After adding the tests
+the branch coverages improved to 12/12 (100%).
+
+The treap (the data structure implemented in treap.cpp) supports several of the same element being added to it. When
+this happens it will find the identical element already present in the data structure and increase a counter on this
+element. This is never tested by the original tests, neither is the code that decreases the counter when a duplicate
+element is removed. The added tests add an identical element to an empty treap twice in a row, checking that the element
+exists after each addition. The tests then erase that same element twice in a row, checking that it still exists after
+the first erase (because there are two of them) and checking that it no longer exists after the second erase.
 
 ### Overall
 
