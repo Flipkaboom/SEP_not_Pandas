@@ -46,11 +46,11 @@ Coverage results:
 ###### bool Tree234::TryRightRotate(Node *parent, Node *to_child)
 ###### void Tree234::Traverse(Node *node)
 
-**Link to commit:** [Commit hash: a04e95c](https://github.com/Flipkaboom/SEP_Pandas/commit/a04e95c7e558e7207822ba46c26297e12121c1a8)
+**Link to commit:** [Commit hash: d7ea02e](https://github.com/Flipkaboom/SEP_not_Pandas/commit/d7ea02e9e652519af13ef7e286294ecd4b9af172)
 
 This commit shows the map data structure used to track if statements in 2 branches for both functions are executed. This is displayed through the added functions print_right_rotate_coverage() and print_traverse_coverage() to show if these branches are hit.
 
-**Link to commit:** [Commit hash: 7597e65](https://github.com/Flipkaboom/SEP_Pandas/commit/7597e65bcd5c14b6ffb5684cc8244cc290675db0)
+**Link to commit:** [Commit hash: efaa53a](https://github.com/Flipkaboom/SEP_not_Pandas/commit/efaa53a35da0d582ba89821849abc86e4caeabf8)
 
 This commit shows the addition of checking the 'invisible' else branch of TryRightRotate() function, in the case that neither of the two brances are executed. Totaling to 3 branches in the TryRightRotate() functino being checked, and 2 branches in Traverse() function
 
@@ -63,7 +63,7 @@ This image shows the coverage of TryRightRotate() and Traverse() functions throu
 ###### void _insert(int &x, int k)
 ###### void _erase(int &x, int k)
 
-**Link to commit:** [Commit hash: 8b0f136](https://github.com/Flipkaboom/SEP_Pandas/commit/8b0f136ebd098611d33d93259d401a125ea277dc)
+**Link to commit:** [Commit hash: fed6d31](https://github.com/Flipkaboom/SEP_not_Pandas/commit/fed6d31446934a74023aabfbc42e1225d4c13b01)
 
 In this commit, branch coverage measurement is added to the functions listed above, located in
 data_structures/treap.cpp. This is done using two maps that map each branch to a boolean value. After running all tests,
@@ -82,13 +82,13 @@ Results:
 ###### void test_right_rotate()
 ###### void test_traverse()
 
-**Link to commit:** [Commit hash: a04e95c](https://github.com/Flipkaboom/SEP_Pandas/commit/a04e95c7e558e7207822ba46c26297e12121c1a8)
+**Link to commit:** [Commit hash: d7ea02e](https://github.com/Flipkaboom/SEP_not_Pandas/commit/d7ea02e9e652519af13ef7e286294ecd4b9af172)
 
 This commit shows the addition of test_right_rotate() and test_traverse() which indirectly calls the functions described above, since they are private functions. The test_right_rotate() function inserts values to a 234-tree data structure and depending on the structure of the tree, when deleting a node (calling the Remove() function) it may internally call the test_right_rotate() function. Two different tree structures are created in this test function to meet the conditions of the branches when trying to rotate the tree right.
 
 The test_traverse() function is far more simple, though similarly the Traverse(Node *node) function is private therefore the Traverse() public function is utilized to indirectly call the helper function. The Traverse(Node *node) function has two branches: one where the tree is empty and the other when it is not, therefore these two cases are implemented in the test_traverse() function.
 
-**Link to commit:** [Commit hash: 7597e65](https://github.com/Flipkaboom/SEP_Pandas/commit/7597e65bcd5c14b6ffb5684cc8244cc290675db0)
+**Link to commit:** [Commit hash: efaa53a](https://github.com/Flipkaboom/SEP_not_Pandas/commit/efaa53a35da0d582ba89821849abc86e4caeabf8)
 
 The structure of the tree was changed here, by inserting different nodes to the tree to meet the conditions of the additional 'invisible' branch that was added.
 
@@ -104,7 +104,7 @@ The line coverage within tree_234.cpp was 56.2%. After the introduction of my te
 
 ###### static void test()
 
-**Link to commit:** [Commit hash: 3cd392c](https://github.com/Flipkaboom/SEP_Pandas/commit/3cd392c7f75dee210900b2e77fc0e31dfc0e76be)
+**Link to commit:** [Commit hash: 617aba4](https://github.com/Flipkaboom/SEP_not_Pandas/commit/617aba47ea0e95fd84f0a6e69d90bea0f382e552)
 
 Line coverage results before:
 
