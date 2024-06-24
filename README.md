@@ -155,4 +155,8 @@ New coverage result:
 - Instrumenting and improving coverage for data_structures/treap.cpp
 - Adding overall coverage results to readme
 
+#### <u>Alejandro Guerena Gonzalez</u>
+- Finding and testing github project that don't have errors with existing coverage tools
+- Instrumenting and improving coverage for data_structures/tree_234.cpp
+
 <Write what each group member did>
