@@ -150,8 +150,17 @@ static void tests(math::ncr_modulo_p::NCRModuloP ncrObj) {
 }
 
 static void enhanced_testing(math::ncr_modulo_p::NCRModuloP ncrObj) {
+    // hits branch 1 of modInverse
     assert(ncrObj.modInverse(6, 15) == -1);
+    assert(ncrObj.modInverse(2, 8) == -1);
+    assert(ncrObj.modInverse(13, 169) == -1);
+
+    // hits branch 4 of ncr
     assert(ncrObj.ncr(50, 7, 14) == -1);
+    assert(ncrObj.ncr(45, 3, 6) == -1);
+    assert(ncrObj.ncr(45, 3, 6) == -1);
+
+    // hits branch 5 of ncr
     assert(ncrObj.ncr(-6, 2, -3) == -1);
 }
 
