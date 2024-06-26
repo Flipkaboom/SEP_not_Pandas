@@ -7,6 +7,7 @@ Name: The Algorithms - C++
 URL: [https://github.com/TheAlgorithms/C-Plus-Plus](https://github.com/TheAlgorithms/C-Plus-Plus)
 
 Number of lines of code and the tool used to count it: 31 KLOC (Measured using lizard)
+![NLOC measured using Lizard](report_img/lizard_nloc.png)
 
 Programming language: C++
 
@@ -73,6 +74,22 @@ Results:
 
 ![Coverage results](old_coverage_img/Flip_old_coverage.png)
 
+#### <u>Saloni Bhandari</u>
+
+###### int64_t ncr(const uint64_t& n, const uint64_t& r, const uint64_t& p)
+###### int64_t modInverse(const uint64_t& a, const uint64_t& m)
+
+**Link to commit:** [Commit hash: e486ccd](https://github.com/Flipkaboom/SEP_not_Pandas/commit/e486ccd1c831e784f2bfe98a8b49699d4ed04f76)
+In this commit I have added branch coverage measurement for the functions ncr and modInverse of math/ncr_modulo_p.cpp. To measure the coverage, I use two maps with strings as keys and bools as value. Whenever a branch is visited, the corresponding boolean is set as true. In the end, I count the number of booleans marked as true, and calculate the percentage as follows:
+
+branch_coverage = #branches_marked_as_true/total_branches * 100
+
+I do this for both functions and then print the coverage as follows:
+
+![Coverage results](old_coverage_img/saloni_old_coverage.png)
+
+This image shows the coverage of ncr() and modInverse() functions through print_coverage() function before adding tests and improving the coverage.
+
 ## Coverage improvement
 
 ### Individual tests
@@ -135,6 +152,32 @@ element is removed. The added tests add an identical element to an empty treap t
 exists after each addition. The tests then erase that same element twice in a row, checking that it still exists after
 the first erase (because there are two of them) and checking that it no longer exists after the second erase.
 
+#### <u>Saloni Bhandari</u>
+
+###### void enhanced_testing()
+
+**Link to commit:** [Commit hash: e486ccd](https://github.com/Flipkaboom/SEP_not_Pandas/commit/e486ccd1c831e784f2bfe98a8b49699d4ed04f76)
+
+In this commit I have added 3 new tests to cover branches that were previously not covered.
+
+**Link to commit:** [Commit hash: 5cdb911](https://github.com/Flipkaboom/SEP_Pandas/commit/5cdb91166981352f9db81cd8344f3b7aab9ce4b0)
+
+In this commit, I have add some extra tests to reach branches that were not previous reached, for more credible results.
+
+![Old Coverage results](old_coverage_img/saloni_old_coverage.png)
+![New Coverage results](new_coverage_img/saloni_new_coverage.png)
+
+![Old Coverage report](report_img/saloni_new_report.jpg)
+![New Coverage report](report_img/saloni_old_report.jpg)
+
+Previously, the branch coverage of modInverse was 50%, and after adding tests it is 100%. Similarly, the branch coverage of insert was 66.6667% and after adding tests the coverage was improved to 100%. After adding tests for both functions, the total branch coverage was increased from 62.5% to 100%. The statement coverage of the entire ncr_modulo_p.cpp file was also increased from 84.1% to 100%. The following images show which branches were not visited before adding tests, and how adding tests increased the coverage.
+
+![Old Coverage for modInverse](old_coverage_img/modInverse_old_coverage.jpg)
+![New Coverage for modInverse](new_coverage_img/modInverse_new_coverage.jpg)
+
+![Old Coverage for ncr](old_coverage_img/ncr_old_coverage.jpg)
+![New Coverage for ncr](new_coverage_img/ncr_new_coverage.jpg)
+
 ### Overall
 
 Old coverage result:
@@ -158,5 +201,11 @@ New coverage result:
 #### <u>Alejandro Guerena Gonzalez</u>
 - Finding and testing github project that don't have errors with existing coverage tools
 - Instrumenting and improving coverage for data_structures/tree_234.cpp
+
+#### <u>Saloni Bhandari</u>
+- Setup testing
+- Fixing cMakeLists.txt to include all functions in coverage report
+- Instrumenting and improving coverage for math/ncr_modulo_p.cpp
+- Adding documentation for readme
 
 <Write what each group member did>
