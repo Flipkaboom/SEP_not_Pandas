@@ -179,16 +179,16 @@ static void print_coverage() {
         }
     }
 
-    double coveragePercentageBinarySearch =
+    double coveragePercentageModInverse =
         static_cast<double>(coveredBranchesModInverse) / BRANCHES_MOD_INVERSE *
         100;
-    std::cout << "Branch Coverage in Binary Search: "
-              << coveragePercentageBinarySearch << "%" << std::endl;
+    std::cout << "Branch Coverage in modInverse: "
+              << coveragePercentageModInverse << "%" << std::endl;
 
-    double coveragePercentageInsert =
+    double coveragePercentageNcr =
         static_cast<double>(coveredBranchesNcr) / BRANCHES_NCR * 100;
-    std::cout << "Branch Coverage in Insert: " << coveragePercentageInsert
-              << "%" << std::endl;
+    std::cout << "Branch Coverage in Insert: " << coveragePercentageNcr << "%"
+              << std::endl;
 
     double totalCoveragePercentage =
         static_cast<double>((coveredBranchesModInverse + coveredBranchesNcr)) /
