@@ -95,10 +95,10 @@ This image shows the coverage of ncr() and modInverse() functions through print_
 ###### node *insert(node *root, int item)
 ###### node *deleteNode(node *root, int element)
 
-**Link to commit:** [Commit hash: b175a60](https://github.com/Flipkaboom/SEP_Pandas/commit/b175a602b639d05a815b3a685ca1ba709bc29488)
+**Link to commit:** [Commit hash: 1a5d461](https://github.com/Flipkaboom/SEP_not_Pandas/commit/1a5d461d83faaae52bf62db324f074bb4e38e391)
 In this commit I have added branch coverage measurement for the functions insert() and deleteNode(), located in data_structures/avltree.cpp. I have done this through the use of two maps that map each branch to a boolean, set initially to false. When a test goes through a certain branch I map it to true. In the end I created a function print_coverage() that loops through each map and counts the booleans set to true. I print my result as number_of_visited_branches/total_branches for each of the two functions.
 
-**Link to commit:** [Commit hash: ebe1e66](https://github.com/Flipkaboom/SEP_Pandas/commit/ebe1e668a69dab86340bbef336c0e7aa4f007146)
+**Link to commit:** [Commit hash: d0538a4](https://github.com/Flipkaboom/SEP_not_Pandas/commit/d0538a44eff914c96d7473e3b2ecdf17f4345425)
 In this commit I have added the explicit checking of the "invisible branches" of insert() and deleteNode() functions. 
 
 ![Coverage results](old_coverage_img/Alessia_old_coverage.png)
@@ -198,10 +198,10 @@ Previously, the branch coverage of modInverse was 50%, and after adding tests it
 ###### void test_left_heavy_for_coverage()
 ###### void test_del_node_two_subtrees()
 
-**Link to commit:** [Commit hash: 2e0ac55](https://github.com/Flipkaboom/SEP_Pandas/commit/2e0ac55a5af98d422a83a56f46adc7fbe1e93ab4)
+**Link to commit:** [Commit hash: 244550d](https://github.com/Flipkaboom/SEP_not_Pandas/commit/244550d51100c9b05b99d80d828a414bf25f8b6e)
 In this commit I have added test_for_improved_coverage(), later renamed as test_left_heavy_for_coverage(), where I have added a case that makes a left-heavy tree to cover many branches that were previously not covered.
 
-**Link to commit:** [Commit hash: 6224e72](https://github.com/Flipkaboom/SEP_Pandas/commit/6224e722bf7ad08af832b84731b0e6f596d3f760)
+**Link to commit:** [Commit hash: a2de9de](https://github.com/Flipkaboom/SEP_not_Pandas/commit/a2de9dedb160f677031e2938c5767f0ff236aaa4)
 In this commit I have added test_del_node_two_subtrees() which is a case where deleteNode() tries to delete a node with both left and right subtrees. This covered all the remaining uncovered branches.
 
 ![Old Coverage for results](old_coverage_img/Alessia_old_coverage.png)
