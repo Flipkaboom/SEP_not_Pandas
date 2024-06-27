@@ -90,6 +90,21 @@ I do this for both functions and then print the coverage as follows:
 
 This image shows the coverage of ncr() and modInverse() functions through print_coverage() function before adding tests and improving the coverage.
 
+#### <u>Alessia Frunza</u>
+
+###### node *insert(node *root, int item)
+###### node *deleteNode(node *root, int element)
+
+**Link to commit:** [Commit hash: b175a60](https://github.com/Flipkaboom/SEP_Pandas/commit/b175a602b639d05a815b3a685ca1ba709bc29488)
+In this commit I have added branch coverage measurement for the functions insert() and deleteNode(), located in data_structures/avltree.cpp. I have done this through the use of two maps that map each branch to a boolean, set initially to false. When a test goes through a certain branch I map it to true. In the end I created a function print_coverage() that loops through each map and counts the booleans set to true. I print my result as number_of_visited_branches/total_branches for each of the two functions.
+
+**Link to commit:** [Commit hash: ebe1e66](https://github.com/Flipkaboom/SEP_Pandas/commit/ebe1e668a69dab86340bbef336c0e7aa4f007146)
+In this commit I have added the explicit checking of the "invisible branches" of insert() and deleteNode() functions. 
+
+![Coverage results](old_coverage_img/Alessia_old_coverage.png)
+
+This image shows the coverage of insert() and deleteNode() functions through print_coverage() and print_traverse_coverage() before adding tests and improving the coverage.
+
 ## Coverage improvement
 
 ### Individual tests
@@ -167,8 +182,8 @@ In this commit, I have add some extra tests to reach branches that were not prev
 ![Old Coverage results](old_coverage_img/saloni_old_coverage.png)
 ![New Coverage results](new_coverage_img/saloni_new_coverage.png)
 
-![Old Coverage report](report_img/saloni_new_report.jpg)
-![New Coverage report](report_img/saloni_old_report.jpg)
+![Old Coverage report](report_img/saloni_old_report.jpg)
+![New Coverage report](report_img/saloni_new_report.jpg)
 
 Previously, the branch coverage of modInverse was 50%, and after adding tests it is 100%. Similarly, the branch coverage of insert was 66.6667% and after adding tests the coverage was improved to 100%. After adding tests for both functions, the total branch coverage was increased from 62.5% to 100%. The statement coverage of the entire ncr_modulo_p.cpp file was also increased from 84.1% to 100%. The following images show which branches were not visited before adding tests, and how adding tests increased the coverage.
 
@@ -177,6 +192,27 @@ Previously, the branch coverage of modInverse was 50%, and after adding tests it
 
 ![Old Coverage for ncr](old_coverage_img/ncr_old_coverage.jpg)
 ![New Coverage for ncr](new_coverage_img/ncr_new_coverage.jpg)
+
+#### <u>Alessia Frunza</u>
+
+###### void test_left_heavy_for_coverage()
+###### void test_del_node_two_subtrees()
+
+**Link to commit:** [Commit hash: 2e0ac55](https://github.com/Flipkaboom/SEP_Pandas/commit/2e0ac55a5af98d422a83a56f46adc7fbe1e93ab4)
+In this commit I have added test_for_improved_coverage(), later renamed as test_left_heavy_for_coverage(), where I have added a case that makes a left-heavy tree to cover many branches that were previously not covered.
+
+**Link to commit:** [Commit hash: 6224e72](https://github.com/Flipkaboom/SEP_Pandas/commit/6224e722bf7ad08af832b84731b0e6f596d3f760)
+In this commit I have added test_del_node_two_subtrees() which is a case where deleteNode() tries to delete a node with both left and right subtrees. This covered all the remaining uncovered branches.
+
+![Old Coverage for results](old_coverage_img/Alessia_old_coverage.png)
+![New Coverage for results](new_coverage_img/Alessia_new_coverage.png)
+
+![Old Coverage report](report_img/Alessia_old_report.png)
+![New Coverage report](report_img/Alessia_new_report.png)
+
+Previously, before adding the tests, 6 out of 11 branches in insert() were covered, after adding my tests it can be seen that 11 out of 11 branches are covered. Similarly for the function deleteNode(), initially 5 out of 7 branches were visited and after adding the tests 7 out of 7 are visited. Previously, the line coverage of avltree.cpp was 85.7%, after adding my new tests, the line coverage now shows 100%.
+
+
 
 ### Overall
 
@@ -208,4 +244,9 @@ New coverage result:
 - Instrumenting and improving coverage for math/ncr_modulo_p.cpp
 - Adding documentation for readme
 
+#### <u>Alessia Frunza</u>
+- Setup testing
+- Adding files and functions to the cMakeLists.txt for setup
+- Instrumenting and improving coverage for data_structures/avltree.cpp
+- Adding documentation to readme
 <Write what each group member did>
